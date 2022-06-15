@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SecondViewController.swift
 //  CALayerApp
 //
 //  Created by Felix Titov on 6/15/22.
@@ -9,13 +9,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class SecondViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
             imageView.layer.cornerRadius = imageView.frame.size.height / 2
             imageView.layer.masksToBounds = true
-            
             let borderColor = UIColor.white
             imageView.layer.borderColor = borderColor.cgColor
             imageView.layer.borderWidth = 10
@@ -25,15 +23,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var button: UIButton! {
         didSet {
             button.layer.shadowOffset = CGSize(width: 0, height: 5)
+            button.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             button.layer.shadowOpacity = 0.5
             button.layer.shadowRadius = 5
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+    }
 }
-
