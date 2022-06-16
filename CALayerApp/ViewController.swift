@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CAAnimationDelegate {
     
     var shapeLayer: CAShapeLayer! {
         didSet {
@@ -106,13 +106,20 @@ class ViewController: UIViewController {
         
     }
     @IBAction func tapped(_ sender: UIButton) {
-        overShapeLayer.strokeEnd += 0.2
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
         
-        if overShapeLayer.strokeEnd == 1 {
-            performSegue(withIdentifier: "showSecondVC", sender: nil)
-        }
+        animation.toValue = 1
+        animation.duration = 1
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        animation.fillMode = CAMediaTimingFillMode.both
+        animation.isRemovedOnCompletion = false
+        
+        animation.delegate = self
+        overShapeLayer.add(animation, forKey: nil)
     }
     
-
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        performSegue(withIdentifier: "showSecondVC", sender: self)
+    }
 }
 

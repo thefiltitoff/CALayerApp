@@ -11,7 +11,7 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
-    
+    // TODO: Animation before the image circle
     
     var gradientLayer: CAGradientLayer! {
         didSet {
