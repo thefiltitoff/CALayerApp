@@ -11,6 +11,32 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var shapeLayer: CAShapeLayer! {
+        didSet {
+            shapeLayer.lineWidth = 20
+            shapeLayer.lineCap = .round
+            shapeLayer.fillColor = nil
+            
+            let color = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1).cgColor
+            shapeLayer.strokeEnd = 1
+            
+            shapeLayer.strokeColor = color
+        }
+    }
+    
+    var overShapeLayer: CAShapeLayer! {
+        didSet {
+            overShapeLayer.lineWidth = 20
+            overShapeLayer.lineCap = .round
+            overShapeLayer.fillColor = nil
+            
+            let color = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+            overShapeLayer.strokeEnd = 0
+            
+            overShapeLayer.strokeColor = color
+        }
+    }
+    
     var gradientLayer: CAGradientLayer! {
         didSet {
             gradientLayer.startPoint = CGPoint(x: 0, y: 0)
@@ -48,6 +74,18 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+        
+        configShapeLayer(shapeLayer)
+        configShapeLayer(overShapeLayer)
+    }
+    
+    func configShapeLayer(_ shapeLayer: CAShapeLayer) {
+        shapeLayer.frame = view.bounds
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: self.view.frame.width / 2 - 100, y: self.view.frame.height / 2))
+        path.addLine(to: CGPoint(x: self.view.frame.width / 2 + 100, y: self.view.frame.height / 2))
+        shapeLayer.path = path.cgPath
     }
     
     
@@ -57,6 +95,24 @@ class ViewController: UIViewController {
         gradientLayer = CAGradientLayer()
         
         view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        shapeLayer = CAShapeLayer()
+        
+        view.layer.addSublayer(shapeLayer)
+        
+        overShapeLayer = CAShapeLayer()
+        
+        view.layer.addSublayer(overShapeLayer)
+        
     }
+    @IBAction func tapped(_ sender: UIButton) {
+        overShapeLayer.strokeEnd += 0.2
+        
+        if overShapeLayer.strokeEnd == 1 {
+            performSegue(withIdentifier: "showSecondVC", sender: nil)
+        }
+    }
+    
+
 }
 

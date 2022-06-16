@@ -37,7 +37,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="IEr-og-I8O" kind="show" id="1aE-Dn-gcg"/>
+                                    <action selector="tapped:" destination="iyh-KC-nB4" eventType="touchUpInside" id="25m-qC-hqo"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -52,6 +52,7 @@
                     <connections>
                         <outlet property="button" destination="lOQ-xG-37z" id="Iea-t5-6QO"/>
                         <outlet property="imageView" destination="XtC-iR-VWe" id="WFI-6J-MTK"/>
+                        <segue destination="IEr-og-I8O" kind="show" identifier="showSecondVC" id="UVQ-jj-aeb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FGt-b8-kJL" sceneMemberID="firstResponder"/>
