@@ -10,6 +10,27 @@
 import UIKit
 
 class SecondViewController: UIViewController {
+    
+    var gradientLayer: CAGradientLayer! {
+        didSet {
+            gradientLayer.startPoint = CGPoint(x: 1, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+//            gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+//            gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+            
+            gradientLayer.locations = [0.2, 0.5, 0.8]
+            
+            gradientLayer.colors = [UIColor.systemBlue.cgColor, UIColor.systemRed.cgColor, UIColor.systemGreen.cgColor]
+            
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = CGRect(x: 0, y: self.view.bounds.size.height * 0.2, width: self.view.bounds.size.width, height: self.view.bounds.size.height * 0.6)
+    }
+    
+    
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
             imageView.layer.cornerRadius = imageView.frame.size.height / 2
@@ -32,6 +53,12 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        gradientLayer = CAGradientLayer()
+        
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        
+       // view.backgroundColor = .red
     }
     
     override func didReceiveMemoryWarning() {
